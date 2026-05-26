@@ -1,0 +1,1 @@
+export default function ProductPreview() { return <div className="mx-auto max-w-6xl px-6"><div className="rounded-2xl border border-violet-500/30 bg-violet-800/20 p-8 text-center text-violet-200">Vista previa de la plataforma y testimonios.</div></div>; }

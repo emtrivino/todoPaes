@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function CTASection(){return <section id="planes" className="mx-auto max-w-4xl px-6 py-16 text-center"><h2 className="text-4xl font-bold">Asegura tu puntaje PAES hoy</h2><p className="mt-4 text-violet-200">Oferta lanzamiento: Plan Intensivo desde $47.990</p><Link href="/pricing" className="mt-8 inline-block rounded-xl bg-white px-8 py-3 font-bold text-violet-900">Ver planes</Link></section>}
