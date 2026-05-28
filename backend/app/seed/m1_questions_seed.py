@@ -3,7 +3,7 @@ from app.models.subject import Subject
 from app.models.topic import Topic
 
 
-def seed_m1_questions(db):
+def seed_m1_questions(db) -> None:
     subject = db.query(Subject).filter_by(code="M1").first()
     if not subject:
         subject = Subject(code="M1", name="Matemática M1")
@@ -16,10 +16,11 @@ def seed_m1_questions(db):
         db.add(topic)
         db.flush()
 
-    if not db.query(Question).filter_by(subject_id=subject.id).first():
+    existing_prompt = "Si x + 3 = 8, ¿cuál es x?"
+    if not db.query(Question).filter_by(subject_id=subject.id, prompt=existing_prompt).first():
         db.add(
             Question(
-                prompt="Si x + 3 = 8, ¿cuál es x?",
+                prompt=existing_prompt,
                 options=["3", "5", "8", "11"],
                 correct_option="5",
                 explanation="Resta 3 en ambos lados.",
