@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h2>Resultado</h2><p class='{{"ok" if correct else "error"}}'>{{"¡Correcto!" if correct else "Incorrecto"}}</p><p>{{question.explanation if question else ''}}</p><a href='/practice'>Seguir practicando</a>{% endblock %}

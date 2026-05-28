@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<h2>Hola, {{user.full_name}}</h2><div class='card'>Intentos: {{summary.total_attempts}} | Correctas: {{summary.correct_attempts}} | Precisión: {{(summary.accuracy*100)|round(1)}}%</div>{% endblock %}

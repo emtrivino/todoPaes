@@ -1,75 +1,58 @@
-# TodoPAES MVP
+# TodoPAES MVP (Python-first local development)
 
-Monorepo MVP para preparar la PAES con enfoque diario tipo app.
+TodoPAES now ships with a **Python-only default workflow**: FastAPI API + built-in server-rendered UI (Jinja2), no Node.js/npm required.
 
-## Requisitos
-- Python 3.11+
-- Node.js 20+
-- Git
-- PyCharm
-
-## Backend
-```bash
+## Quickstart (Windows CMD + PyCharm friendly)
+```bat
 cd backend
 python -m venv .venv
-# Windows:
 .venv\Scripts\activate
-# Mac/Linux:
-source .venv/bin/activate
+python -m pip install --upgrade pip
 pip install -e .
-cp ../.env.example .env
-python -m app.seed.seed_data
-uvicorn app.main:app --reload --port 8000
+python -m app.seed.seed_data --reset
+python -m uvicorn app.main:app --reload --port 8000
 ```
 
-## Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+Open:
+- http://127.0.0.1:8000
+- http://127.0.0.1:8000/docs
 
-Abrir:
-- Backend docs: http://localhost:8000/docs
-- Frontend: http://localhost:3000
-
-Demo:
+Demo user after seed:
 - demo@todopaes.cl
 - demo1234
 
-## PyCharm
-1. Abre la carpeta raíz `todopaes` en PyCharm.
-2. Configura el intérprete backend con `backend/.venv`.
-3. Crea Run Configuration:
+## PyCharm setup
+1. Open the **repository root** folder in PyCharm.
+2. Set interpreter to `backend/.venv`.
+3. Create a Run Configuration:
    - Module name: `uvicorn`
    - Parameters: `app.main:app --reload --port 8000`
    - Working directory: `backend`
-4. En terminal de frontend ejecuta `npm run dev`.
+4. Run seed in terminal:
+   - `python -m app.seed.seed_data`
+   - or safe reset: `python -m app.seed.seed_data --reset`
+5. Start run config and browse:
+   - `http://127.0.0.1:8000`
+   - `http://127.0.0.1:8000/docs`
 
-## GitHub push
-```bash
-git init
-git add .
-git commit -m "Initial TodoPAES MVP"
+## Windows helper scripts (CMD)
+- `scripts\setup_backend.bat`
+- `scripts\run_backend.bat`
+- `scripts\reset_db.bat`
+
+## Backend notes
+- Supported target versions: Python 3.10, 3.11, 3.12.
+- Use `python` commands (not `py`).
+- Main API endpoints remain available under `/api/v1/*`.
+
+## Frontend status
+- `frontend/` (Next.js) remains in the repository as optional/legacy.
+- It is **not required** for default local development.
+
+## Troubleshooting schema mismatch
+If local SQLite schema is out-of-date, seed prints a clear message and stops.
+Run:
+```bat
+python -m app.seed.seed_data --reset
 ```
-
-Opción A (GitHub CLI):
-```bash
-gh repo create todopaes --private --source=. --remote=origin --push
-```
-
-Opción B (manual):
-```bash
-git remote add origin https://github.com/YOUR_USER/todopaes.git
-git branch -M main
-git push -u origin main
-```
-
-## Roadmap sugerido
-- Importador de datos oficiales de admisión
-- Suscripciones con MercadoPago (TODO)
-- Más asignaturas PAES
-- Motor adaptativo
-- CMS admin
-- SEO/Blog
-- Wrapper móvil
+This reset is explicit and avoids silent data loss.
